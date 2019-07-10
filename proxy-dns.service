@@ -1,0 +1,21 @@
+[Unit]
+Description=Proxy DNS Server
+After=syslog.target
+After=network.target
+Requires=network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/main.pid
+WorkingDirectory=/usr/bin/
+
+User=root
+Group=root
+
+ExecStart=/usr/bin/proxy-dns.sh start
+ExecStop=/usr/bin/proxy-dns.sh stop
+ExecReload=/usr/bin/proxy-dns.sh restart
+TimeoutSec=300
+
+[Install]
+WantedBy=multi-user.target 
